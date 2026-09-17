@@ -1,4 +1,4 @@
-# 📱 Telecom Customer Churn Prediction System
+#  Telecom Customer Churn Prediction System
 
 A machine learning system that predicts customer churn 
 for telecom companies with explainability and 
@@ -8,10 +8,23 @@ personalized retention strategies.
 ![XGBoost](https://img.shields.io/badge/XGBoost-3.2-green)
 ![SHAP](https://img.shields.io/badge/SHAP-0.51-orange)
 
-## 🔗 Live Demo
-[Web App](https://telecom-churn-prediction-main.vercel.app/)
+##  Live Demo
+[Streamlit App](https://telecom-churn-prediction-xpa5emx28vo8c23kegohcs.streamlit.app/) ← Main App (Real ML Model)
 
-## 🎯 Project Overview
+[Web Demo](https://telecom-churn-prediction-main.vercel.app/) ← Frontend UI Demo 
+
+###  Backend / ML Engine
+| Technology | Purpose |
+| Python | Core Language |
+| XGBoost | ML Model (94% accuracy) |
+| SHAP | Model Explainability |
+| Streamlit | Web Framework |
+| Scikit-learn | ML Pipeline |
+| SMOTE | Class Imbalance |
+| Pandas/Numpy | Data Processing |
+| Streamlit Cloud | Deployment |
+
+## Project Overview
 
 This system helps telecom companies:
 - **Predict** which customers will churn
@@ -19,7 +32,7 @@ This system helps telecom companies:
 - **Prioritize** customers by risk level
 - **Suggest** personalized retention strategies
 
-## 📊 Key Results
+## Key Results
 
 | Metric | Score |
 |--------|-------|
@@ -29,7 +42,7 @@ This system helps telecom companies:
 | Recall | 64.38% |
 | F1-Score | 68.66% |
 
-## 🎯 Risk Segmentation
+## Risk Segmentation
 
 | Category | Customers | Actual Churn Rate |
 |----------|-----------|-------------------|
@@ -37,7 +50,7 @@ This system helps telecom companies:
 | 🟡 YELLOW (Monitor) | 3,279 | 61.8% |
 | 🟢 GREEN (Safe) | 89,324 | 1.4% |
 
-## ✨ Unique Features
+## Unique Features
 
 1. **SHAP Explainability** 
    - Shows exactly WHY each customer will churn
@@ -59,29 +72,29 @@ This system helps telecom companies:
 ##  Project Structure
 Telecom_churn_project/
 │
-├── app.py ← Streamlit Web App
-├── requirements.txt ← Dependencies
+├── app.py               ← Streamlit Web App
+├── index.html           ← Frontend UI Demo
+├── requirements.txt     ← Dependencies
 │
 ├── models/
-│ ├── final_xgboost_model.pkl
-│ ├── scaler.pkl
-│ ├── shap_explainer.pkl
-│ └── feature_names.json
+│   ├── final_xgboost_model.pkl
+│   ├── scaler.pkl
+│   ├── shap_explainer.pkl
+│   └── feature_names.json
 │
 ├── results/
-│ ├── model_results.csv
-│ ├── project_summary.json
-│ ├── shap_importance.csv
-│ └── best_params.json
+│   ├── model_results.csv
+│   ├── project_summary.json
+│   ├── shap_importance.csv
+│   └── best_params.json
 │
 └── assets/
-├── final_dashboard.png
-├── confusion_roc.png
-├── shap_summary.png
-└── risk_segmentation.png
+    ├── final_dashboard.png
+    ├── confusion_roc.png
+    ├── shap_summary.png
+    └── risk_segmentation.png
 
-
-## 🔧 Tech Stack
+##  Tech Stack
 
 | Tool | Purpose |
 |------|---------|
