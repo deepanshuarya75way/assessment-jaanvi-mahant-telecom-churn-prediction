@@ -821,12 +821,7 @@ def main():
                 'roam_ic_mou_8'    : roam_ic,
             }
 
-            # Add all other features as 0
-            all_base_cols = feature_names.copy()
-            for col in all_base_cols:
-                if col not in customer_data:
-                    customer_data[col] = 0
-
+            # Make DataFrame with ONLY user values
             df_customer = pd.DataFrame([customer_data])
 
             # Predict
