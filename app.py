@@ -798,45 +798,82 @@ def main():
 
         # ── Prediction ────────────────────────────────────────
         if submitted:
-            # Build customer dataframe
             customer_data = {
-                'arpu_6'           : arpu_6,
-                'arpu_7'           : arpu_7,
-                'arpu_8'           : arpu_8,
-                'total_og_mou_6'   : og_6,
-                'total_og_mou_7'   : og_7,
-                'total_og_mou_8'   : og_8,
-                'total_ic_mou_6'   : ic_6,
-                'total_ic_mou_7'   : ic_7,
-                'total_ic_mou_8'   : ic_8,
-                'total_rech_amt_6' : rech_amt_6,
-                'total_rech_amt_7' : rech_amt_7,
-                'total_rech_amt_8' : rech_amt_8,
-                'total_rech_num_6' : rech_num_6,
-                'total_rech_num_7' : rech_num_7,
-                'total_rech_num_8' : rech_num_8,
-                'aon'              : aon,
+                'arpu_6'            : arpu_6,
+                'arpu_7'            : arpu_7,
+                'arpu_8'            : arpu_8,
+                'total_og_mou_6'    : og_6,
+                'total_og_mou_7'    : og_7,
+                'total_og_mou_8'    : og_8,
+                'total_ic_mou_6'    : ic_6,
+                'total_ic_mou_7'    : ic_7,
+                'total_ic_mou_8'    : ic_8,
+                'total_rech_amt_6'  : rech_amt_6,
+                'total_rech_amt_7'  : rech_amt_7,
+                'total_rech_amt_8'  : rech_amt_8,
+                'total_rech_num_6'  : rech_num_6,
+                'total_rech_num_7'  : rech_num_7,
+                'total_rech_num_8'  : rech_num_8,
+                'aon'               : aon,
                 'last_day_rch_amt_8': last_rch,
-                'roam_og_mou_8'    : roam_og,
-                'roam_ic_mou_8'    : roam_ic,
-            }
+                'roam_og_mou_8'     : roam_og,
+                'roam_ic_mou_8'     : roam_ic,
 
+        # ── AVERAGE VALUES FROM TRAINING DATA ──
+        # Local Outgoing Calls
+                'loc_og_mou_6'      : og_6 * (141.09/303.18),
+                'loc_og_mou_7'      : og_7 * (138.66/307.55),
+                'loc_og_mou_8'      : og_8 * (137.15/302.53),
+
+        # Local Incoming Calls
+                'loc_ic_mou_6'      : ic_6 * (164.53/196.0),
+                'loc_ic_mou_7'      : ic_7 * (164.82/197.63),
+                'loc_ic_mou_8'      : ic_8 * (163.47/195.16),
+
+        # STD Outgoing Calls
+                'std_og_mou_6'      : og_6 * (162.09/303.18),
+                'std_og_mou_7'      : og_7 * (168.89/307.55),
+                'std_og_mou_8'      : og_8 * (165.38/302.53),
+
+        # STD Incoming Calls
+                'std_ic_mou_6'      : ic_6 * (31.41/196.0),
+                'std_ic_mou_7'      : ic_7 * (32.81/197.63),
+                'std_ic_mou_8'      : ic_8 * (31.69/195.16),
+
+        # ISD Incoming Calls
+                'isd_ic_mou_6'      : 7.17,
+                'isd_ic_mou_7'      : 8.01,
+                'isd_ic_mou_8'      : 7.99,
+
+        # Special Calls
+                'spl_og_mou_6'      : 3.76,
+                'spl_og_mou_7'      : 4.79,
+                'spl_og_mou_8'      : 4.78,
+                'spl_ic_mou_6'      : 0.06,
+                'spl_ic_mou_7'      : 0.03,
+                'spl_ic_mou_8'      : 0.04,
+
+        # Recharge
+                'max_rech_amt_6'    : rech_amt_6,
+                'max_rech_amt_7'    : rech_amt_7,
+                'max_rech_amt_8'    : rech_amt_8,
+
+        # Data Recharge
+                'av_rech_amt_data_6': 48.45,
+                'av_rech_amt_data_7': 51.39,
+                'av_rech_amt_data_8': 52.03,
+
+        # Data Volume
+                'vol_2g_mb_6'       : 51.90,
+                'vol_2g_mb_7'       : 51.23,
+                'vol_2g_mb_8'       : 50.17,
+                'vol_3g_mb_6'       : 121.40,
+                'vol_3g_mb_7'       : 129.00,
+                'vol_3g_mb_8'       : 135.41,
+    }
             # Make DataFrame with ONLY user values
             df_customer = pd.DataFrame([customer_data])
-            # ← ADD THESE DEBUG LINES
-            df_eng = engineer_features(df_customer)
-            df_eng = df_eng.fillna(0)
-    
-            st.write("### DEBUG INFO:")
-            st.write(f"arpu_6: {df_eng['arpu_6'].values[0]}")
-            st.write(f"arpu_8: {df_eng['arpu_8'].values[0]}")
-            st.write(f"arpu_trend: {df_eng['arpu_trend'].values[0]}")
-            st.write(f"og_mou_trend: {df_eng['og_mou_trend'].values[0]}")
-            st.write(f"ic_mou_trend: {df_eng['ic_mou_trend'].values[0]}")
-            st.write(f"total_ic_mou_8: {df_eng['total_ic_mou_8'].values[0]}")
-            st.write(f"tenure_months: {df_eng['tenure_months'].values[0]}")
-            # ← END DEBUG LINES
-
+            
             # Predict
             with st.spinner("🔮 Predicting..."):
                 probs, preds, X_scaled = predict_churn(
