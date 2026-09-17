@@ -823,6 +823,19 @@ def main():
 
             # Make DataFrame with ONLY user values
             df_customer = pd.DataFrame([customer_data])
+            # ← ADD THESE DEBUG LINES
+            df_eng = engineer_features(df_customer)
+            df_eng = df_eng.fillna(0)
+    
+            st.write("### DEBUG INFO:")
+            st.write(f"arpu_6: {df_eng['arpu_6'].values[0]}")
+            st.write(f"arpu_8: {df_eng['arpu_8'].values[0]}")
+            st.write(f"arpu_trend: {df_eng['arpu_trend'].values[0]}")
+            st.write(f"og_mou_trend: {df_eng['og_mou_trend'].values[0]}")
+            st.write(f"ic_mou_trend: {df_eng['ic_mou_trend'].values[0]}")
+            st.write(f"total_ic_mou_8: {df_eng['total_ic_mou_8'].values[0]}")
+            st.write(f"tenure_months: {df_eng['tenure_months'].values[0]}")
+            # ← END DEBUG LINES
 
             # Predict
             with st.spinner("🔮 Predicting..."):
