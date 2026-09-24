@@ -487,8 +487,9 @@ def main():
             "🏠 Home / Dashboard",
             "👤 Single Customer Prediction",
             "📁 Bulk CSV Prediction",
-            "📊 Model Performance"
-        ]
+            "📊 Model Performance",
+            "Customer History"
+        ],label_visibility="collapsed"
     )
 
     # ── Sidebar Stats ─────────────────────────────────────────
@@ -1355,6 +1356,38 @@ def main():
                 '</div>',
                 unsafe_allow_html=True
             )
+    elif page == "Customer History":
+        from customer_history import "
+        st.markdown("## Customer history")
+        tab1, tab2, tab3, tab4 = st.tabs([
+            "Profile","All Customers",
+            "Offers", "Stats"
+        ])"
+
+        with tab1:
+            cid = st.text_input("CUSTOMER ID")
+            if st.button("Search"):
+                h = get_customer_history(cid)
+                if h['customer'].empty:
+                    st.error("Not Found!")
+                else:
+                    st.sataframe(h["predictions"])
+                    st.dataframe(h["offers"]
+                    st.dataframe(h["outcomes"]))
+        
+        with tab2:
+            st.dataframe(get_all_customers)
+        with tab3:
+            st.dataframe(get_offer_effictiveness())
+        with tab4:
+            s= get_dashnoard_stats()
+            a,b,c,d,e = st.columns(5)
+    a.metric("Customers",s['total_customers'])
+    b.metric("Predictions",s['total_predictions'])
+    c.metric("Offers",s['total_offers'])
+    d.metric("Accepted",s['offers_accepted'])
+    e.metric("Risk REduced",s['risk_reduced'])        
+            
 
 # ============================================================
 # RUN APP
