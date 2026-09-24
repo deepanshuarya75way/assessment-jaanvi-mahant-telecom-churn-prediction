@@ -2,7 +2,6 @@
 # TELECOM CUSTOMER CHURN PREDICTION SYSTEM
 # Web Application
 # ============================================================
-
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -15,6 +14,9 @@ import plotly.express as px
 import os
 import warnings
 warnings.filterwarnings('ignore')
+
+from customer_history import init_database 
+init_database()
 
 # ============================================================
 # PAGE CONFIGURATION
@@ -567,7 +569,7 @@ def main():
                 showlegend = True,
                 title  = "Customer Risk Distribution"
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, use_container_width="100%")
 
         with col2:
             st.markdown("### 📊 Risk Validation")
